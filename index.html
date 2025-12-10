@@ -1,32 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Chess</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Glorious Chess — Multiplayer</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase (Realtimedb) SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <!-- chess.js für Regeln -->
+  <script src="https://cdn.jsdelivr.net/npm/chess.js@1.0.0/chess.min.js"></script>
 </head>
 <body>
-    <div class="game-container">
-        <header>
-            <h1>MASTER CHESS</h1>
-            <div id="status-display">Weiß ist am Zug</div>
-        </header>
+  <div id="container">
+    <header>
+      <h1>Glorious Chess</h1>
+      <div id="controls">
+        <input id="roomInput" placeholder="Raum-ID eingeben / neu erstellen" />
+        <button id="createBtn">Neu erstellen</button>
+        <button id="joinBtn">Beitreten</button>
+        <span id="status">Status: offline</span>
+      </div>
+    </header>
 
-        <div id="chessboard">
-            </div>
-
-        <div class="controls">
-            <button id="reset-btn">Neues Spiel starten</button>
+    <main>
+      <aside id="side">
+        <div id="gameInfo">
+          <p id="roomLabel">Kein Raum</p>
+          <p id="colorLabel">Farbe: —</p>
+          <p id="turnLabel">Am Zug: —</p>
         </div>
-        
-        <div id="captured-pieces">
-            <div id="captured-white"></div>
-            <div id="captured-black"></div>
-        </div>
-    </div>
+        <div id="moves"></div>
+        <button id="resetBtn">Zurücksetzen</button>
+      </aside>
 
-    <script src="script.js"></script>
+      <section id="boardWrap">
+        <div id="board"></div>
+      </section>
+    </main>
+
+    <footer>
+      <small>Design: neon-graffiti Stil — passe Farben in <code>style.css</code> an.</small>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
-
