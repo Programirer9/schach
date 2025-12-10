@@ -1,0 +1,128 @@
+:root {
+    --bg-color: #121212;
+    --board-dark: #2c3e50;
+    --board-light: #ecf0f1;
+    --highlight: #f1c40f; /* Gelb für Auswahl */
+    --possible-move: rgba(46, 204, 113, 0.6); /* Grün für mögliche Züge */
+    --danger: #e74c3c; /* Rot für Schach/Schlagen */
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+h1 {
+    font-weight: 300;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+#status-display {
+    font-size: 1.2rem;
+    padding: 8px 20px;
+    background: #333;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Das Schachbrett */
+#chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+    border: 5px solid #333;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    user-select: none;
+}
+
+.square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    cursor: pointer;
+    position: relative;
+}
+
+.light { background-color: var(--board-light); color: black; }
+.dark { background-color: var(--board-dark); color: white; }
+
+/* Figuren Styling (wenn eine dunkle Figur auf dunklem Feld steht, Farbe anpassen wenn nötig) */
+.piece {
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.piece.white { color: #fff; text-shadow: 0 0 2px #000; }
+.piece.black { color: #000; text-shadow: 0 0 2px #fff; }
+
+/* Interaktions-Klassen */
+.selected {
+    background-color: var(--highlight) !important;
+}
+
+/* Punkt für möglichen Zug */
+.possible-move::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: var(--possible-move);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Ring für Schlag-Zug */
+.capture-move {
+    background-color: rgba(231, 76, 60, 0.4) !important; /* Rötlicher Hintergrund */
+    box-shadow: inset 0 0 0 4px var(--danger);
+}
+
+#reset-btn {
+    padding: 10px 25px;
+    background: transparent;
+    border: 2px solid var(--highlight);
+    color: var(--highlight);
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+#reset-btn:hover {
+    background: var(--highlight);
+    color: #000;
+}
+
+/* Responsivität für Handys */
+@media (max-width: 500px) {
+    #chessboard {
+        grid-template-columns: repeat(8, 12vw);
+        grid-template-rows: repeat(8, 12vw);
+    }
+    .square {
+        width: 12vw;
+        height: 12vw;
+        font-size: 8vw;
+    }
+}
